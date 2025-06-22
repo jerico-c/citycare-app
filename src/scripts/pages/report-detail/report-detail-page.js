@@ -11,8 +11,9 @@ import {
 import { createCarousel } from '../../utils';
 import ReportDetailPresenter from './report-detail-presenter';
 import { parseActivePathname } from '../../routes/url-parser';
-import Map from '../../utils/map';
 import * as CityCareAPI from '../../data/api';
+import Map from '../../utils/map';
+import Database from '../../data/database';
 
 export default class ReportDetailPage {
   #presenter = null;
@@ -54,6 +55,7 @@ export default class ReportDetailPage {
     this.#presenter = new ReportDetailPresenter(parseActivePathname().id, {
       view: this,
       apiModel: CityCareAPI,
+      dbModel: Database,
     });
 
     this.#setupForm();
@@ -68,8 +70,10 @@ export default class ReportDetailPage {
       description: report.description,
       damageLevel: report.damageLevel,
       evidenceImages: report.evidenceImages,
-      location: report.location,
+      latitudeLocation: report.location.latitude,
+      longitudeLocation: report.location.longitude,
       reporterName: report.reporter.name,
+      location: report.location,
       createdAt: report.createdAt,
     });
 
@@ -78,6 +82,7 @@ export default class ReportDetailPage {
 
     // Map
     await this.#presenter.showReportDetailMap();
+
     if (this.#map) {
       const reportCoordinate = [report.location.latitude, report.location.longitude];
       const markerOptions = { alt: report.title };
@@ -130,6 +135,7 @@ export default class ReportDetailPage {
   }
 
   async initialMap() {
+    // TODO: map initialization
     this.#map = await Map.build('#map', {
       zoom: 15,
     });
@@ -167,8 +173,17 @@ export default class ReportDetailPage {
       generateSaveReportButtonTemplate();
 
     document.getElementById('report-detail-save').addEventListener('click', async () => {
-      alert('Fitur simpan laporan akan segera hadir!');
+      await this.#presenter.saveReport();
+      await this.#presenter.showSaveButton();
     });
+  }
+
+  saveToBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  saveToBookmarkFailed(message) {
+    alert(message);
   }
 
   renderRemoveButton() {
@@ -176,14 +191,14 @@ export default class ReportDetailPage {
       generateRemoveReportButtonTemplate();
 
     document.getElementById('report-detail-remove').addEventListener('click', async () => {
-      alert('Fitur simpan laporan akan segera hadir!');
+      await this.#presenter.removeReport();
+      await this.#presenter.showSaveButton();
     });
   }
 
   addNotifyMeEventListener() {
     document.getElementById('report-detail-notify-me').addEventListener('click', () => {
       this.#presenter.notifyMe();
-      alert('Fitur notifikasi laporan akan segera hadir!');
     });
   }
 
@@ -225,5 +240,13 @@ export default class ReportDetailPage {
     document.getElementById('submit-button-container').innerHTML = `
       <button class="btn" type="submit">Tanggapi</button>
     `;
+  }
+
+  removeFromBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  removeFromBookmarkFailed(message) {
+    alert(message);
   }
 }

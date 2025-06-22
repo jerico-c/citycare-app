@@ -20,7 +20,7 @@
     transform: translateX(100%);
   }
 }
-
+ 
 @keyframes full-slide-to-left {
   to {
     transform: translateX(-100%);
@@ -29,13 +29,13 @@
 
 ::view-transition-old(root) {
   animation-name: full-slide-to-left;
-  animation-duration: 900ms;
+  animation-duration: 500ms;
   animation-timing-function: ease-out;
 }
 
 ::view-transition-new(root) {
   animation-name: full-slide-from-right;
-  animation-duration: 900ms;
+  animation-duration: 500ms;
   animation-timing-function: ease-out;
 }
 
@@ -832,6 +832,10 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.new-form__documentations__input {
+  display: none;
 }
 
 .new-form__camera__container {

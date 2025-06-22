@@ -8,26 +8,24 @@ export default class Map {
   #zoom = 5;
   #map = null;
 
+  static isGeolocationAvailable() {
+    return 'geolocation' in navigator;
+  }
+
   static async getPlaceNameByCoordinate(latitude, longitude) {
     try {
       const url = new URL(`https://api.maptiler.com/geocoding/${longitude},${latitude}.json`);
       url.searchParams.set('key', MAP_SERVICE_API_KEY);
       url.searchParams.set('language', 'id');
       url.searchParams.set('limit', '1');
-
       const response = await fetch(url);
       const json = await response.json();
-
       const place = json.features[0].place_name.split(', ');
       return [place.at(-2), place.at(-1)].map((name) => name).join(', ');
     } catch (error) {
       console.error('getPlaceNameByCoordinate: error:', error);
       return `${latitude}, ${longitude}`;
     }
-  }
-
-  static isGeolocationAvailable() {
-    return 'geolocation' in navigator;
   }
 
   static getCurrentPosition(options = {}) {
@@ -125,27 +123,21 @@ export default class Map {
     if (typeof markerOptions !== 'object') {
       throw new Error('markerOptions must be an object');
     }
-
     const newMarker = marker(coordinates, {
       icon: this.createIcon(),
       ...markerOptions,
     });
-
     if (popupOptions) {
       if (typeof popupOptions !== 'object') {
         throw new Error('popupOptions must be an object');
       }
-
       if (!('content' in popupOptions)) {
         throw new Error('popupOptions must include `content` property.');
       }
-
       const newPopup = popup(coordinates, popupOptions);
       newMarker.bindPopup(newPopup);
     }
-
     newMarker.addTo(this.#map);
-
     return newMarker;
   }
 

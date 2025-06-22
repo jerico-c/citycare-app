@@ -5,8 +5,8 @@ import {
   generateReportsListErrorTemplate,
 } from '../../templates';
 import HomePresenter from './home-presenter';
-import Map from '../../utils/map';
 import * as CityCareAPI from '../../data/api';
+import Map from '../../utils/map';
 
 export default class HomePage {
   #presenter = null;
@@ -52,14 +52,13 @@ export default class HomePage {
         const coordinate = [report.location.latitude, report.location.longitude];
         const markerOptions = { alt: report.title };
         const popupOptions = { content: report.title };
-
         this.#map.addMarker(coordinate, markerOptions, popupOptions);
       }
 
       return accumulator.concat(
         generateReportItemTemplate({
           ...report,
-          placeNameLocation: report.location.placeName,
+          location: report.location.placeName,
           reporterName: report.reporter.name,
         }),
       );

@@ -14,10 +14,9 @@ CityCareApp adalah aplikasi pelaporan kerusakan fasilitas umum yang memungkinkan
 
 ## Instalasi
 
-- Unduh starter project [citycareapp-starter-project.zip](https://raw.githubusercontent.com/dicodingacademy/a219-web-intermediate-labs/099-shared-files/citycareapp-starter-project.zip).
-- Unzip berkas ZIP yang telah diunduh. Bisa pakai perintah berikut untuk Linux:
+- Lakukan unduh starter project c:
   ```bash
-  unzip ./citycareapp-starter-project.zip
+  
   ```
 
 - Masuk ke direktori proyek:
@@ -25,7 +24,7 @@ CityCareApp adalah aplikasi pelaporan kerusakan fasilitas umum yang memungkinkan
   cd citycareapp-starter-project
   ```
 
-- Pasang seluruh dependensi:
+- Instal dependensi:
   ```bash
   npm install
   ```

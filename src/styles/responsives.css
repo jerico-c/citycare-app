@@ -3,24 +3,30 @@
     opacity: 0;
   }
 }
-
 @keyframes fade-out {
   to {
     opacity: 0;
   }
 }
-
 @keyframes slide-to-left {
   to {
     transform: translateX(-30px);
   }
 }
-
 @keyframes slide-from-right {
   from {
     transform: translateX(30px);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 
 @media screen and (width > 600px) {
   ::view-transition-old(root) {
@@ -28,7 +34,6 @@
       fade-out 90ms cubic-bezier(0.4, 0, 1, 1) both,
       slide-to-left 300ms cubic-bezier(0.4, 0, 0.2, 1) both;
   }
-
   ::view-transition-new(root) {
     animation:
       fade-in 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both,
@@ -44,7 +49,7 @@
   /* LOGIN & REGISTER */
   .register-form,
   .login-form {
-    border: 1px solid #d4d4d4;
+    border: 1px solid #D4D4D4;
   }
 
   /* Report detail */
