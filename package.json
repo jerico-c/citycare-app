@@ -10,7 +10,7 @@
     "prettier:write": "prettier . --write"
   },
   "keywords": [],
-  "author": "Al Farizi Dwi Prasetyo | yoerdanatan@gmail.com",
+  "author": "Jerico Christianto | jericochristianto@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.26.9",
