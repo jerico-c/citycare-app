@@ -37,7 +37,6 @@ export default class NewPresenter {
         return;
       }
 
-      // No need to wait response
       this.#notifyToAllUser(response.data.id);
 
       this.#view.storeSuccessfully(response.message, response.data);
@@ -49,7 +48,7 @@ export default class NewPresenter {
     }
   }
 
-   async #notifyToAllUser(reportId) {
+  async #notifyToAllUser(reportId) {
     try {
       const response = await this.#model.sendReportToAllUserViaNotification(reportId);
       if (!response.ok) {

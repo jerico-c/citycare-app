@@ -87,7 +87,7 @@ export function generateReportItemTemplate({
   evidenceImages,
   reporterName,
   createdAt,
-  placeNameLocation,
+  location,
 }) {
   return `
     <div tabindex="0" class="report-item" data-reportid="${id}">
@@ -100,7 +100,7 @@ export function generateReportItemTemplate({
               <i class="fas fa-calendar-alt"></i> ${showFormattedDate(createdAt, 'id-ID')}
             </div>
             <div class="report-item__location">
-              <i class="fas fa-map"></i> ${placeNameLocation}
+              <i class="fas fa-map"></i> ${location}
             </div>
           </div>
         </div>
@@ -189,8 +189,10 @@ export function generateReportDetailTemplate({
   description,
   damageLevel,
   evidenceImages,
-  location,
+  latitudeLocation,
+  longitudeLocation,
   reporterName,
+  location,
   createdAt,
 }) {
   const createdAtFormatted = showFormattedDate(createdAt, 'id-ID');
@@ -208,10 +210,10 @@ export function generateReportDetailTemplate({
       <div class="report-detail__more-info">
         <div class="report-detail__more-info__inline">
           <div id="createdat" class="report-detail__createdat" data-value="${createdAtFormatted}"><i class="fas fa-calendar-alt"></i></div>
-          <div id="location-place-name" class="report-detail__location__place-name" data-value="${location.placeName}"><i class="fas fa-map"></i></div>
+           <div id="location-place-name" class="report-detail__location__place-name" data-value="${location.placeName}"><i class="fas fa-map"></i></div>
         </div>
         <div class="report-detail__more-info__inline">
-          <div id="location-latitude" class="report-detail__location__latitude" data-value="${location.latitude}">Latitude:</div>
+           <div id="location-latitude" class="report-detail__location__latitude" data-value="${location.latitude}">Latitude:</div>
           <div id="location-longitude" class="report-detail__location__longitude" data-value="${location.longitude}">Longitude:</div>
         </div>
         <div id="author" class="report-detail__author" data-value="${reporterName}">Dilaporkan oleh:</div>

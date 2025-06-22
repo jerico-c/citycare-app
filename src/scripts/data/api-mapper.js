@@ -1,4 +1,4 @@
-import Map from '../utils/map';
+import Map from '../../scripts/utils/map';
 
 export async function reportMapper(report) {
   return {

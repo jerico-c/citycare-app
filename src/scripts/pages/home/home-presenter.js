@@ -14,7 +14,7 @@ export default class HomePresenter {
     try {
       await this.#view.initialMap();
     } catch (error) {
-      console.error('showReportsListMap: error:', error);
+      console.error('showListMap: error:', error);
     } finally {
       this.#view.hideMapLoading();
     }
@@ -33,9 +33,9 @@ export default class HomePresenter {
         return;
       }
 
-      const reports = await Promise.all(response.data.map(reportMapper));
+      const report = await Promise.all(response.data.map(reportMapper));
 
-      this.#view.populateReportsList(response.message, reports);
+      this.#view.populateReportsList(response.message, report);
     } catch (error) {
       console.error('initialGalleryAndMap: error:', error);
       this.#view.populateReportsListError(error.message);
